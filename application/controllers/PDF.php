@@ -20,7 +20,7 @@
             $dompdf->render();
             $output = $dompdf->output();
             $pdf = $id . '.pdf'; // Name the PDF file with the user's ID number
-            $save_path = 'H:/pdf/' . $pdf; // Specify the directory to save the PDF
+            $save_path = 'E:/pdf/' . $pdf; // Specify the directory to save the PDF
     
             file_put_contents($save_path, $output);
     
