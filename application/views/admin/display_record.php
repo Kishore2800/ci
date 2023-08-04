@@ -14,9 +14,28 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/adminlte.min.css">
    <!-- DataTables -->
-  <link rel="stylesheet" href="<?=base_url();?>a/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>a/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>a/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url();?>assets/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url();?>assets/css/buttons.bootstrap4.min.css">
+  <style>
+    /* Style for the image container */
+    .image-container {
+        max-width: 200px; /* Set the maximum width of the container */
+    }
+
+    /* Style for the image */
+    .image-container img {
+        width: 100%; /* Make the image occupy the full width of the container */
+        height: auto; /* Maintain the aspect ratio of the image */
+        display: block; /* Remove any extra space below the image */
+    }
+
+    /* Optional style for the link (if you want to change the link appearance) */
+    .image-container a {
+        text-decoration: none; /* Remove underline from the link */
+        color: #000; /* Set the link color */
+    }
+</style>
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -128,10 +147,14 @@
                     <td><?=$users->userid?></td>
                     <td><?=$users->howdoyou?></td>
                     <td><?=$users->emp_ref?></td>
-                    <td> <a href="<?php echo base_url('uploads/user_images/' . $users->img); ?>" download>
-                        <img src="<?php echo base_url('uploads/user_images/' . $users->img); ?>" alt="Applicant Image" />
-                    </a></td>
-                    <td><a href="<?php echo base_url('uploads/user_resumes/'.$users->resume); ?>" target="_blank">Download Resume</a></td>
+                     <td>
+                        <div class="image-container">
+                          <a href="<?php echo base_url($users->img); ?>" download>
+                              <img src="<?php echo base_url($users->img)?>" alt="Applicant signature" />
+                          </a>
+                        </div>
+                      </td>
+                    <td><a href="<?php echo base_url($users->resume); ?>" target="_blank">Download Resume</a></td>
                     <td><?=$users->name?></td>
                     <td><?=$users->lname?></td>
                     <td><?=$users->age?></td>
@@ -607,9 +630,26 @@
                             <td><?=$users->ref_Organization_name?></td>
                             <td><?=$users->ref_con_um?></td>
                             <td><?=$users->ref_email_id?></td>
-                            <td><?=$users->simage?></td>  
+                            <td>
+                                <div class="image-container">
+                                <?php
+                                  if (isset($users->simage) && !empty($users->simage)) {
+                                    $imageUrl = base_url(ltrim($users->simage));
+                                ?>
+                                  <a href="<?php echo $imageUrl; ?>" download>
+                                    <img src="<?php echo $imageUrl; ?>" alt="Applicant signature" />
+                                  </a>
+                                <?php
+                                } else {
+                                  // Handle the case when $users->simage is null or empty
+                                  // Display a default image or an error message, or do nothing based on your requirements.
+                                }
+                                ?>
+
+                                </div>
+                            </td>
                         </tr>    
-                        
+
                   </tfoot>
                 </table>
               </div>
