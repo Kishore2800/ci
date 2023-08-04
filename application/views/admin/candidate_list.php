@@ -109,7 +109,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach ($candidates as $users): ?>
+                  <?php foreach ($candidates as $users) {?>
                     <tr>
                     <td><?=$users->id?></td>
                     <td><?=$users->userid?></td>
@@ -124,7 +124,7 @@
                         <a href="<?=base_url('admin/deleteUser/'.$users->id)?>" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                         </tr>  
-                        <?php endforeach; ?>
+                        <?php }?>
                   </tfoot>
                 </table>
               </div>
