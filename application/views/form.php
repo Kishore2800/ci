@@ -76,13 +76,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-lg-12">
             <div class="card card-primary card-outline" style="padding: 50px; margin: 20px;">
           
-               <div class="card-body">
+                  <div class="card-body">
+                  <?php if (isset($errors)) { ?>
+                    <div class="error-message">
+                  <?php echo $errors; ?>
+                    </div>
+                  <?php } ?>
                 <div><?echo validation_errors()?></div>
               <form action="<?php echo base_url('User/saveData')?>" method="POST"  enctype="multipart/form-data">
              <h5 class="card-title">How do you know jayapriya group of companies?<span style= "color: red"; >*</span></h5><br><br>
                 
-                        <div class="col-sm-4">
-     <select name="howdoyou" id="OperationType"  class="form-control" onchange="check();">
+      <div class="col-sm-4">
+     <select name="howdoyou" id="OperationType" value="<?php echo set_value('howdoyou'); ?>"  class="form-control" onchange="check();">
       <option value="">--Select--</option>
         <option value="Social Media">Social Media</option>
         <option value="Paper Ad">Paper Ad</option>
@@ -91,6 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value="OpNo">Agent</option>
         <option value="OpNo">Others</option>
      </select>
+     <?php echo form_error('howdoyou'); ?>
     </div><br>
           <div class="custom-control custom-radio">
           <div class="row">
@@ -101,21 +107,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container">
         </div>
          
-                    <!-- Modal body -->
-                     
-                    <div class="row">
-                    <div class="col-sm-6">
+  <div class="col-sm-6">
   <div class="row">
     <div class="col-sm-12">
     <div class="form-group" style="float: right;">
-         <label class="lable"> Image:- </label>
-         <div style="border: 1px solid black; height: 150px; width: 150px; background: #F5FAFF;">
-        <img id="output" width="150" height="150" style="display: none;">
-      </div>
+         <label class="lable"> Photo </label>
+   <div style="border: 1px solid black; height: 150px; width: 150px;  background: #F5FAFF;">
+      <img id="output"  width="150" height="150" / style="display:none">
+  </div>
 
-      <input type="file" name="img[]" id="image" onchange="loadFile(event)" class="form-control" required accept="image/*">
-     
-</div>
+      <input type="file" name="img" id="image" onchange="loadFile(event)"  value="<?php echo set_value('img'); ?>" class="form-control" required accept="image/*">
+      <?php echo form_error('img'); ?>
 </div>
 </div>
 </div>
@@ -126,17 +128,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="col-sm-6">
     <div class="form-group" style="float: left;">
          <label class="lable"> Resume:- </label>
-    <input type="file" name="resume" id="resume" onchange="loadFile(event)" class="form-control" required accept="file/*" / style="width:" >
-
+    <input type="file" name="resume" id="resume"  value="<?php echo set_value('resume'); ?>" class="form-control" required accept="file/*" / style="width:" >
+    <?php echo form_error('resume'); ?>
 </div>
 </div>
-</div>
-
-
-
-                       
-                       
-                 
+</div>               
           
 <br>
 <!--persional details-->
@@ -147,7 +143,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">First Name<span style= "color: red"; >*</span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="name" class="form-control" >
+      <input type="text" name="name" value="<?php echo set_value('name'); ?>" class="form-control" >
+      <?php echo form_error('name'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -155,7 +152,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Last Name<span style= "color: red"; >* </span> :- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="lname" class="form-control" >
+      <input type="text" name="lname" value="<?php echo set_value('lname'); ?>" class="form-control" >
+      <?php echo form_error('lname'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -163,7 +161,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Age<span style= "color: red"; >* </span> :- </label>
     </div>
      <div class="col-sm-8">
-      <input type="number" name="age" class="form-control" >
+      <input type="number" name="age" value="<?php echo set_value('age'); ?>" class="form-control" >
+      <?php echo form_error('age'); ?>
     </div>
     </div>
    <!-- Date and time -->
@@ -172,7 +171,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">DOB<span style= "color: red"; >* </span> :- </label>
     </div>
      <div class="col-sm-8" >
-      <input type="date" name="dob" id="dob" class="form-control" >
+      <input type="date" name="dob" value="<?php echo set_value('dob'); ?>" id="dob" class="form-control" >
+      <?php echo form_error('dob'); ?>
     </div>
     </div>
 
@@ -184,12 +184,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Gender<span style= "color: red"; >* </span> :- </label>
     </div>
      <div class="col-sm-8">
-     <select name="gender" class="form-control" >
+     <select name="gender" value="<?php echo set_value('gender'); ?>" class="form-control" >
       <option value="">Select Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
-     </select>
+     </select><?php echo form_error('gender'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -197,7 +197,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Father Name<span style= "color: red"; >* </span> :- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="faname" class="form-control" >
+      <input type="text" name="faname" value="<?php echo set_value('faname'); ?>" class="form-control" >
+      <?php echo form_error('faname'); ?>
     </div>
     </div>
 
@@ -206,14 +207,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Maritial status<span style= "color: red"; >* </span> :-</label>
     </div>
      <div class="col-sm-8">
-     <select name="maritial" id="maritial" onchange="marit();" class="form-control" >
+     <select name="maritial" id="maritial" value="<?php echo set_value('maritial'); ?>" onchange="marit();" class="form-control" >
       <option value="">Select Maritial</option>
         <option value="single">single</option>
         <option value="Married">Married</option>
         <option value="Married">widow</option>
         <option value="Married">widower</option>
         <option value="Married">Seperate</option>
-     </select>
+     </select><?php echo form_error('maritial'); ?>
     </div>
     </div>
    
@@ -226,20 +227,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     </div>
 
-
-
     <div class="mb-3 row">
    <div class="col-sm-4">
       <label class="lable">Religion <span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-     <select name="Religion" class="form-control" >
+     <select name="Religion" value="<?php echo set_value('Religion'); ?>" class="form-control" >
       <option value="">Select Religion</option>
         <option value="Hindu">Hindu</option>
         <option value="Christian">Christian</option>
         <option value="Muslim">Muslim</option>
         <option value="Others">Others</option>
-     </select>
+     </select><?php echo form_error('Religion'); ?>
     </div>
     </div>
    
@@ -248,13 +247,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Community<span style= "color: red"; >* </span> :-</label>
     </div>
      <div class="col-sm-8">
-     <select name="Community"  class="form-control" >
+     <select name="Community" value="<?php echo set_value('Religion'); ?>" class="form-control" >
       <option value="">Select your Community</option>
         <option value="OC/FC">OC/FC</option>
         <option value="BC">BC</option>
         <option value="MBC">MBC</option>
         <option value="SC/ST">SC/ST</option>
-     </select>
+     </select><?php echo form_error('Religion'); ?>
     </div>
     </div>
    
@@ -263,11 +262,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Differently abled person<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-     <select name="daperson" id="diffable" onchange="ifable();" class="form-control" >
+     <select name="daperson" id="diffable" onchange="ifable();" value="<?php echo set_value('daperson'); ?>" class="form-control" >
       <option value="">Select differently</option>
         <option value="ableyes">yes</option>
         <option value="ableno">No</option>
-     </select>
+     </select><?php echo form_error('daperson'); ?>
     </div>
     </div>
     <div class="mb-3 row" id="diffable1">
@@ -275,7 +274,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable"> If Yes Please Mention in Details :- </label>
     </div>
      <div class="col-sm-8">
-     <textarea name="ifdetails" class="form-control" ></textarea>
+     <textarea name="ifdetails"  class="form-control" ></textarea>
     </div>
     </div>
     <div class="mb-3 row">
@@ -283,7 +282,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Mobile No<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="p_mobile" maxlength="10" class="form-control" >
+      <input type="text" name="p_mobile" maxlength="10" value="<?php echo set_value('p_mobile'); ?>" class="form-control" >
+      </select><?php echo form_error('p_mobile'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -291,7 +291,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Email<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="p_email" class="form-control" >
+      <input type="text" name="p_email" value="<?php echo set_value('p_email'); ?>" class="form-control" >
+      </select><?php echo form_error('p_email'); ?>
     </div>
 </div>
 </div>
@@ -310,7 +311,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable"  for="primaryaddress">Present Address<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-     <textarea type="text" id="primaryaddress" name="paddress" class="form-control" ></textarea>
+     <textarea type="text" id="primaryaddress" name="paddress"  value="<?php echo set_value('paddress'); ?>" class="form-control" ></textarea>
+     <?php echo form_error('paddress'); ?>
     </div>
     </div>
 
@@ -319,7 +321,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">State<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="State" id="State" class="form-control" >
+     <select name="State" id="State"  value="<?php echo set_value('State'); ?>" class="form-control" >
       <option value="">Select State</option>
         <option value="Andhra-Pradesh">Andhra Pradesh</option>
         <option value="Arunachal-Pradesh">Arunachal Pradesh</option>
@@ -349,7 +351,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value="Uttar-Pradesh">Uttar Pradesh</option>
         <option value="Uttarakhand">Uttarakhand</option>
         <option value="West-Bengal">West Bengal</option>
-     </select>
+     </select><?php echo form_error('State'); ?>
     </div>
     </div>
 
@@ -359,7 +361,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">District<span style= "color: red"; >*</span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="District" id="primarydistrict" class="form-control" >
+     <select name="District" id="primarydistrict"  value="<?php echo set_value('District'); ?>" class="form-control" >
       <option value="">Select District</option>
         <option value=" Ariyalur">Ariyalur</option>
         <option value="Chengalpattu ">Chengalpattu</option>
@@ -399,7 +401,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value=" Vellore">Vellore</option>
         <option value=" Viluppuram">Viluppuram</option>
         <option value=" Virudhunagar">Virudhunagar</option>
-     </select>
+     </select><?php echo form_error('District'); ?>
     </div>
     </div>
    
@@ -408,7 +410,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="primaryzip">Pincode<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" id="primaryzip" name="Pincode" maxlength="6" class="form-control" >
+      <input type="text" id="primaryzip" name="Pincode" maxlength="6"  value="<?php echo set_value('Pincode'); ?>" class="form-control" >
+      <?php echo form_error('Pincode'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -423,7 +426,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable"  for="secondaryaddress"> Permenent Address<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-     <textarea type="text" id="secondaryaddress" name="peaddress" class="form-control" ></textarea>
+     <textarea type="text" id="secondaryaddress" name="peaddress" value="<?php echo set_value('peaddress'); ?>" class="form-control" ></textarea>
+     <?php echo form_error('peaddress'); ?>
     </div>
     </div>
    
@@ -434,7 +438,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">State<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="pestate" id="pestate" class="form-control" >
+     <select name="pestate" id="pestate" value="<?php echo set_value('pestate'); ?>" class="form-control" >
      <option value="">Select State</option>
      <option value="Andhra-Pradesh">Andhra Pradesh</option>
         <option value="Arunachal-Pradesh">Arunachal Pradesh</option>
@@ -464,7 +468,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value="Uttar-Pradesh">Uttar Pradesh</option>
         <option value="Uttarakhand">Uttarakhand</option>
         <option value="West-Bengal">West Bengal</option>
-     </select>
+     </select><?php echo form_error('pestate'); ?>
     </div>
     </div>
    
@@ -473,7 +477,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">District<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="pedistrict" id="secondarydistrict" class="form-control" >
+     <select name="pedistrict" id="secondarydistrict" value="<?php echo set_value('pedistrict'); ?>" class="form-control" >
      <option value="">Select District</option>
      <option value=" Ariyalur">Ariyalur</option>
         <option value="Chengalpattu ">Chengalpattu</option>
@@ -513,7 +517,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value=" Vellore">Vellore</option>
         <option value=" Viluppuram">Viluppuram</option>
         <option value=" Virudhunagar">Virudhunagar</option>
-     </select>
+     </select><?php echo form_error('pedistrict'); ?>
     </div>
     </div>
    
@@ -522,7 +526,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="secondaryzip">Pincode<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" id="secondaryzip" name="pepincode" maxlength="6" class="form-control" >
+      <input type="text" id="secondaryzip" name="pepincode" maxlength="6" value="<?php echo set_value('pepincode'); ?>" class="form-control" >
+      <?php echo form_error('pepincode'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -537,7 +542,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="kycaddress">KYC Address<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-     <textarea name="kaddress" id="kycaddress" class="form-control" ></textarea>
+     <textarea name="kaddress" id="kycaddress" value="<?php echo set_value('kaddress'); ?>" class="form-control" ></textarea>
+     <?php echo form_error('kaddress'); ?>
     </div>
     </div>
 
@@ -547,7 +553,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">State<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="kstate" class="form-control" >
+     <select name="kstate" value="<?php echo set_value('kstate'); ?>" class="form-control" >
       <option value="">Select State</option>
       <option value="Andhra-Pradesh">Andhra Pradesh</option>
         <option value="Arunachal-Pradesh">Arunachal Pradesh</option>
@@ -577,7 +583,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value="Uttar-Pradesh">Uttar Pradesh</option>
         <option value="Uttarakhand">Uttarakhand</option>
         <option value="West-Bengal">West Bengal</option>
-     </select>
+     </select><?php echo form_error('kstate'); ?>
     </div>
     </div>
 
@@ -586,7 +592,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">District<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-6">
-     <select name="kdistrict" id="kycdistrict" class="form-control" >
+     <select name="kdistrict" id="kycdistrict" value="<?php echo set_value('kdistrict'); ?>" class="form-control" >
      <option value="">Select District</option>
      <option value=" Ariyalur">Ariyalur</option>
         <option value="Chengalpattu ">Chengalpattu</option>
@@ -626,7 +632,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <option value=" Vellore">Vellore</option>
         <option value=" Viluppuram">Viluppuram</option>
         <option value=" Virudhunagar">Virudhunagar</option>
-     </select>
+     </select><?php echo form_error('kdistrict'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -634,7 +640,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="kyczip">Pincode<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" id="kyczip" name="kpincode" maxlength="6" class="form-control" >
+      <input type="text" id="kyczip" name="kpincode" maxlength="6" value="<?php echo set_value('kpincode'); ?>" class="form-control" >
+      <?php echo form_error('kpincode'); ?>
     </div>
     </div>
 
@@ -656,7 +663,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="emgname">Name<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="emg_name" id="emgname" class="form-control" >
+      <input type="text" name="emg_name" id="emgname" value="<?php echo set_value('emg_name'); ?>" class="form-control" >
+      <?php echo form_error('emg_name'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -664,7 +672,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="emgrelation">Relationship<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="emg_relationship" id="emgrelation" class="form-control" >
+      <input type="text" name="emg_relationship" id="emgrelation" value="<?php echo set_value('emg_relationship'); ?>" class="form-control" >
+      <?php echo form_error('emg_relationship'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -672,7 +681,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="emgcontact">Contact Number<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="emg_con_number" maxlength="10" id="emgcontact" class="form-control" >
+      <input type="text" name="emg_con_number" maxlength="10" id="emgcontact" value="<?php echo set_value('emg_con_number'); ?>" class="form-control" >
+      <?php echo form_error('emg_con_number'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -680,7 +690,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="emgaddress">Address<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="emg_address" id="emgaddress" class="form-control" >
+      <input type="text" name="emg_address" id="emgaddress" value="<?php echo set_value('emg_address'); ?>" class="form-control" >
+      <?php echo form_error('emg_address'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -695,7 +706,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="noname">Nominee Name<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="nomname" id="noname"  class="form-control" >
+      <input type="text" name="nomname" id="noname" value="<?php echo set_value('nomname'); ?>"  class="form-control" >
+      <?php echo form_error('nomname'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -703,7 +715,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="norelation"> Nominee Relationship<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="nom_relationship" id="norelation"  class="form-control" >
+      <input type="text" name="nom_relationship" id="norelation" value="<?php echo set_value('nom_relationship'); ?>" class="form-control" >
+      <?php echo form_error('nom_relationship'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -711,7 +724,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="nocontact"> Contact Number<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="nom_number" maxlength="10" id="nocontact" class="form-control" >
+      <input type="text" name="nom_number" maxlength="10" id="nocontact" value="<?php echo set_value('nom_number'); ?>" class="form-control" >
+      <?php echo form_error('nom_number'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -719,7 +733,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable" for="noaddress">Nominee Address<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-6">
-      <input type="text" name="nom_address" id="noaddress"  class="form-control" >
+      <input type="text" name="nom_address" id="noaddress" value="<?php echo set_value('nom_address'); ?>" class="form-control" >
+      <?php echo form_error('nom_address'); ?>
     </div>
     </div>
 </div>
@@ -731,11 +746,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <h5 class="card-title m-0">If  Yes, please mention the details below<span style= "color: red"; >* </span></h5><br>
                     <div class="form-group"><br>
                     <center><div class="col-sm-4">
-                    <select name=" customRadio1" class="form-control" id="Type" onchange="Click();" >
+                    <select name=" customRadio1" value="<?php echo set_value('customRadio1'); ?>" class="form-control" id="Type" onchange="Click();" >
                         <option value="">--Select--</option>
                         <option value="oppyes">Yes</option>
                         <option value="no">No</option>
-                    </select> 
+                    </select><?php echo form_error('customRadio1'); ?>
               </div> </center>
                         <br>
     <div  class="mb-3 row" id=Operationyes>
@@ -784,26 +799,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
   <tr>
   <td>SSLC<span style= "color: red"; >* </span></td>
-    <td><input type="text" name="sslcname" class="form-control" ></td>
-    <td><input type="text" name="sslcmark" class="form-control" ></td>
-    <td><input type="text" name="sslcyop" class="form-control" ></td>
-    <td><select name=" sslcbreak" class="form-control" >
+    <td><input type="text" name="sslcname" value="<?php echo set_value('sslcname'); ?>" class="form-control" ><?php echo form_error('sslcname'); ?></td>
+    <td><input type="text" name="sslcmark" value="<?php echo set_value('sslcmark'); ?>" class="form-control" ><?php echo form_error('sslcmark'); ?></td>
+    <td><input type="text" name="sslcyop" value="<?php echo set_value('sslcyop'); ?>" class="form-control" ><?php echo form_error('sslcyop'); ?></td>
+    <td><select name=" sslcbreak" value="<?php echo set_value('sslcbreak'); ?>" class="form-control" >
                         <option value="">--Select--</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select></td>
+                    </select><?php echo form_error('sslcbreak'); ?></td>
   </tr>
  
   <tr>
     <td>HSC<span style= "color: red"; >* </span></td>
-    <td><input type="text" name="hscname" class="form-control" ></td>
-    <td><input type="text" name="hscmark" class="form-control" ></td>
-    <td><input type="text" name="hscyop" class="form-control" ></td>
-    <td><select name="hscbreak" class="form-control" >
+    <td><input type="text" name="hscname" value="<?php echo set_value('hscname'); ?>" class="form-control" ><?php echo form_error('hscname'); ?></td>
+    <td><input type="text" name="hscmark" value="<?php echo set_value('hscmark'); ?>" class="form-control" ><?php echo form_error('hscmark'); ?></td>
+    <td><input type="text" name="hscyop" value="<?php echo set_value('hscyop'); ?>" class="form-control" ><?php echo form_error('hscyop'); ?></td>
+    <td><select name="hscbreak" value="<?php echo set_value('hscbreak'); ?>" class="form-control" >
                         <option value="">--Select--</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select></td>
+                    </select><?php echo form_error('hscbreak'); ?></td>
   </tr>
 
   <tr>
@@ -854,11 +869,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable"> working Experience<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-4">
-     <select name=" wrk_exp" id="works" class="form-control" onchange="work();" >
+     <select name=" wrk_exp" id="works"  value="<?php echo set_value('wrk_exp'); ?>" class="form-control" onchange="work();" >
       <option value="">--Select--</option>
         <option value="expyes">Experience</option>
         <option value="Fresher" >Fresher</option>
-     </select>
+     </select><?php echo form_error('wrk_exp'); ?>
     </div>
     </div>
    </div>
@@ -1146,10 +1161,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       
   <tr>
-    <td><input type="text" name="fam_name1" class="form-control" ></td>
-    <td><input type="text" name="fam_relationship1" class="form-control" ></td>
-    <td><input type="text" name="fam_occupation1" class="form-control" ></td>
-    <td><input type="text" name="fam_contact1" maxlength="10" class="form-control" ></td>
+    <td><input type="text" name="fam_name1"  value="<?php echo set_value('fam_name1'); ?>" class="form-control" ><?php echo form_error('fam_name1'); ?></td>
+    <td><input type="text" name="fam_relationship1" value="<?php echo set_value('fam_relationship1'); ?>" class="form-control" ><?php echo form_error('fam_relationship1'); ?></td>
+    <td><input type="text" name="fam_occupation1" value="<?php echo set_value('fam_occupation1'); ?>" class="form-control" ><?php echo form_error('fam_occupation1'); ?></td>
+    <td><input type="text" name="fam_contact1" maxlength="10" value="<?php echo set_value('fam_contact1'); ?>"  class="form-control" ><?php echo form_error('fam_contact1'); ?></td>
   </tr>
       
   <tr>
@@ -1201,8 +1216,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
   <tr>
   <td>Aadhaar<span style= "color: red"; >* </span>:-</td>
-    <td><input type="text" name="aadhar_docname" class="form-control" ></td>
-    <td><input type="text" name="aadhar_docnum" class="form-control" ></td>
+    <td><input type="text" name="aadhar_docname" value="<?php echo set_value('aadhar_docname'); ?>" class="form-control" > <?php echo form_error('aadhar_docname'); ?></td>
+    <td><input type="text" name="aadhar_docnum" value="<?php echo set_value('aadhar_docnum'); ?>" class="form-control" ><?php echo form_error('aadhar_docnum'); ?></td>
     
     
   </tr>
@@ -1216,8 +1231,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <tr>
   <div class="lable">
   <td>Bank Pass Book<span style= "color: red"; >* </span>:-</td>
-    <td><input type="text" name="bank_book_name" class="form-control" ></td>
-    <td><input type="text" name="bank_book_num" class="form-control" ></td>
+    <td><input type="text" name="bank_book_name" value="<?php echo set_value('bank_book_name'); ?>" class="form-control" > <?php echo form_error('bank_book_name'); ?></td>
+    <td><input type="text" name="bank_book_num" value="<?php echo set_value('bank_book_num'); ?>" class="form-control" ><?php echo form_error('bank_book_num'); ?> </td>
 </div>
   </tr>
   <tr>
@@ -1225,7 +1240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <td>IFSC<span style= "color: red"; >* </span>:-</td>
       <div class="col-sm-4" required>
       <td><input type="number" name="ifsc_num" class="form-control" disabled></td>
-      <td><input type="text" name="ifsc1_num" class="form-control" ></td>
+      <td><input type="text" name="ifsc1_num" value="<?php echo set_value('ifsc1_num'); ?>" class="form-control" ><?php echo form_error('ifsc1_num'); ?></td>
     </div>
   </tr>
 
@@ -1250,7 +1265,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Hobbies<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="Hobbies"  class="form-control" >
+      <input type="text" name="Hobbies" value="<?php echo set_value('Hobbies'); ?>" class="form-control" ><?php echo form_error('Hobbies'); ?>
     </div>
     </div>
 
@@ -1259,7 +1274,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Strength<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="Strength"  class="form-control" >
+      <input type="text" name="Strength" value="<?php echo set_value('Strength'); ?>" class="form-control" ><?php echo form_error('Strength'); ?>
     </div>
     </div>
 
@@ -1268,7 +1283,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Weakness<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="Weakness"  class="form-control" >
+      <input type="text" name="Weakness"  class="form-control" required>
     </div>
     </div>
 
@@ -1288,21 +1303,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <h5 class="card-title">Drinking Habbit<span style= "color: red"; >* </span>:- </h5><br>
                         <div class="form-group">
                         <center><div class="col-sm-4">
-                    <select name=" customRadio4" class="form-control" >
+                    <select name=" customRadio4"value="<?php echo set_value('customRadio4'); ?>" class="form-control" required>
                         <option value="">--Select--</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select> 
+                    </select> <?php echo form_error('customRadio4'); ?>
                   </div> </center>
                         <br>
                             <h5 class="card-title">Smoking Habbit<span style= "color: red"; >* </span>:-</h5><br>
                         <div class="form-group">
                         <center><div class="col-sm-4">
-                    <select name=" customRadio5" class="form-control" >
+                    <select name=" customRadio5" value="<?php echo set_value('customRadio5'); ?>" class="form-control" required>
                         <option value="">--Select--</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select> 
+                    </select> <?php echo form_error('customRadio5'); ?>
                   </div> </center>
                            <br>
     <h5 class="card-title">Refernce</h5><br><br>
@@ -1311,7 +1326,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Name<span style= "color: red"; >* </span>:- </label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="ref_name"  class="form-control" >
+      <input type="text" name="ref_name" value="<?php echo set_value('ref_name'); ?>" class="form-control" required>
+      <?php echo form_error('ref_name'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -1319,7 +1335,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Designation<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="ref_designation"  class="form-control" >
+      <input type="text" name="ref_designation" value="<?php echo set_value('ref_designation'); ?>" class="form-control" required>
+      <?php echo form_error('ref_designation'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -1327,7 +1344,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Organization Name<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="ref_Organization_name"  class="form-control" >
+      <input type="text" name="ref_Organization_name" value="<?php echo set_value('ref_Organization_name'); ?>" class="form-control" required>
+      <?php echo form_error('ref_Organization_name'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -1335,7 +1353,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Contact Number<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-      <input type="text" name="ref_con_um" maxlength="10"  class="form-control" >
+      <input type="text" name="ref_con_um" maxlength="10" value="<?php echo set_value('ref_con_um'); ?>" class="form-control" required>
+      <?php echo form_error('ref_con_um'); ?>
     </div>
     </div>
     <div class="mb-3 row">
@@ -1343,7 +1362,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <label class="lable">Email ID<span style= "color: red"; >* </span>:-</label>
     </div>
      <div class="col-sm-8">
-      <input type="Email" name="ref_email_id"  class="form-control" >
+      <input type="Email" name="ref_email_id" value="<?php echo set_value('ref_email_id'); ?>" class="form-control" required>
+      <?php echo form_error('ref_email_id'); ?>
     </div>
 
 
@@ -1417,15 +1437,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <div class="row">
     <div class="col-sm-12">
-    <div class="form-group" style="float: left;">
-         <label class="lable"> Signature:- </label>
-   <div style="border: 1px solid black; height: 150px; width: 150px;  background: #F5FAFF;">
-      <img id="output"  width="150" height="150" / style="display:none">
-  </div>
+        <div class="form-group" style="float: left;">
+            <label class="lable"> Signature:- </label>
+            <div style="border: 1px solid black; height: 150px; width: 150px; background: #F5FAFF;">
+                <img id="out" width="150" height="150" style="display:none">
+            </div>
 
-    <input type="file" name="simage" id="simage" onchange="loadFile(event)" class="form-control" required accept="image/*" / style="width:" >
-</div>
-</div>
+            <input type="file" name="simage" id="simage" onchange="loadImage(event)" value="<?php echo set_value('simage'); ?>" class="form-control" accept="image/*" required>
+            <?php echo form_error('simage'); ?>
+        </div>
+    </div>
 </div>
 
 
@@ -1664,17 +1685,7 @@ function marit() {
     }
 }
 </script>
-<!--resume upload-->
-<script>
-  var loadFiles = function(event) {
-    var reader = new FileReader();
-    reader.onload = function(){
-      var output = document.getElementById('outputs');
-      output.src = reader.result;
-    }; 
-  };
-</script>
-<!--resume upload-->
+
 <!--image upload-->
 <script>
   var loadFile = function(event) {
@@ -1689,6 +1700,26 @@ function marit() {
   };
 </script>
 <!--image upload-->
+<!--image sign-->
+<script>
+    function loadImage(event) {
+        var fileInput = event.target;
+        var imageOutput = document.getElementById('out');
+        
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                imageOutput.style.display = 'block';
+                imageOutput.src = e.target.result;
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            imageOutput.style.display = 'none';
+            imageOutput.src = '';
+        }
+    }
+</script>
+<!--image sign-->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.querySelector(".add-row");
