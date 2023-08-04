@@ -98,16 +98,86 @@ class User extends CI_Controller {
             $this->login_check();
             $this->load->view('form');
        }
-        
-        
 
+      
         public function saveData(){
-            extract($_POST);
+            $this->load->library('form_validation');
+
+            if ($this->input->server('REQUEST_METHOD') === 'POST') {
+
+                $this->form_validation->set_rules('howdoyou', 'How do you', 'required');
+                $this->form_validation->set_rules('name', 'Name', 'required');
+                //$this->form_validation->set_rules('img', 'Profile Image', 'required');
+                //$this->form_validation->set_rules('resume', 'CV Resume', 'required');
+                $this->form_validation->set_rules('lname', 'Last Name', 'required');
+                $this->form_validation->set_rules('age', 'Age', 'required|numeric');
+                $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+                $this->form_validation->set_rules('gender', 'Gender', 'required');
+                $this->form_validation->set_rules('faname', 'Father Name', 'required');
+                $this->form_validation->set_rules('maritial', 'Maritial status', 'required');
+                $this->form_validation->set_rules('Religion', 'Religion ', 'required');
+                $this->form_validation->set_rules('Community', 'Community ', 'required');
+                $this->form_validation->set_rules('daperson', 'Differently abled person ', 'required');
+                $this->form_validation->set_rules('p_mobile', 'Mobile No ', 'required');
+                $this->form_validation->set_rules('p_email', 'Email ', 'required');
+                $this->form_validation->set_rules('paddress', 'Present Address ', 'required');
+                $this->form_validation->set_rules('State', 'State ', 'required');
+                $this->form_validation->set_rules('District', 'District ', 'required');
+                $this->form_validation->set_rules('Pincode', 'Pincode ', 'required');
+                $this->form_validation->set_rules('peaddress', 'Permenent Address ', 'required');
+                $this->form_validation->set_rules('pestate', 'State ', 'required');
+                $this->form_validation->set_rules('pedistrict', 'District ', 'required');
+                $this->form_validation->set_rules('pepincode', 'Pincode ', 'required');
+                $this->form_validation->set_rules('kaddress', 'KYC Address ', 'required');
+                $this->form_validation->set_rules('kstate', 'State ', 'required');
+                $this->form_validation->set_rules('kdistrict', 'District ', 'required');
+                $this->form_validation->set_rules('kpincode', 'Pincode ', 'required');
+                $this->form_validation->set_rules('emg_name', 'Emergency Name ', 'required');
+                $this->form_validation->set_rules('emg_relationship', 'Emergency Relationship ', 'required');
+                $this->form_validation->set_rules('emg_con_number', 'Contact Number ', 'required');
+                $this->form_validation->set_rules('emg_address', 'Emergency Address ', 'required');
+                $this->form_validation->set_rules('nomname', 'Nominee Name ', 'required');
+                $this->form_validation->set_rules('nom_relationship', 'Nominee Relationship ', 'required');
+                $this->form_validation->set_rules('nom_number', 'Nominee Contact ', 'required');
+                $this->form_validation->set_rules('nom_address', 'Nominee Address ', 'required');
+                $this->form_validation->set_rules('customRadio1', ' Blood Relation ', 'required');
+                $this->form_validation->set_rules('sslcname', ' University', 'required');
+                $this->form_validation->set_rules('sslcmark', 'Mark ', 'required');
+                $this->form_validation->set_rules('sslcyop', 'Year of Passing ', 'required');
+                $this->form_validation->set_rules('sslcbreak', 'SSLC Break', 'required');
+                $this->form_validation->set_rules('hscname', 'University ', 'required');
+                $this->form_validation->set_rules('hscmark', 'Mark ', 'required');
+                $this->form_validation->set_rules('hscyop', 'Year of Passing ', 'required');
+                $this->form_validation->set_rules('hscbreak', 'HSC Break ', 'required');
+                $this->form_validation->set_rules('wrk_exp', 'working Experience ', 'required');
+                $this->form_validation->set_rules('fam_name1', 'Family Name ', 'required');
+                $this->form_validation->set_rules('fam_relationship1', 'Relationship ', 'required');
+                $this->form_validation->set_rules('fam_occupation1', 'Occupation ', 'required');
+                $this->form_validation->set_rules('fam_contact1', 'Contact', 'required');
+                $this->form_validation->set_rules('aadhar_docname', 'Aadhaar Name', 'required');
+                $this->form_validation->set_rules('aadhar_docnum', 'Aadhaar Number', 'required');
+                $this->form_validation->set_rules('bank_book_name', 'Bank Number', 'required');
+                $this->form_validation->set_rules('bank_book_num', 'Bank Number', 'required');
+                $this->form_validation->set_rules('ifsc1_num', 'IFSC Number', 'required');
+                $this->form_validation->set_rules('Hobbies', 'Hobbies', 'required');
+                /*$this->form_validation->set_rules('Strength', 'Strength', 'required');
+                $this->form_validation->set_rules('customRadio4', 'Drinking Habbit', 'required');
+                $this->form_validation->set_rules('customRadio5', 'Smoking Habbit', 'required');
+                $this->form_validation->set_rules('ref_name', 'Refernce Name', 'required');
+                $this->form_validation->set_rules('ref_designation', 'Refernce Designation ', 'required');
+                $this->form_validation->set_rules('ref_Organization_name', 'Refernce Organization ', 'required');
+                $this->form_validation->set_rules('ref_con_um', 'Refernce Contact', 'required');
+                $this->form_validation->set_rules('ref_email_id', 'Refernce Email ', 'required');
+                //$this->form_validation->set_rules('simage', 'Signature', 'required');*/
+                if ($this->form_validation->run() == false) {
+                   $data = array();
+                    $this->load->view('form', $data);
+                } else {
+
+                extract($_POST);
             $data = [
                 "howdoyou" => $howdoyou,
                 "emp_ref" => $emp_ref,
-                "img" => $img,
-                "resume" => $resume,
                 "name" => $name,
                 "lname" => $lname,
                 "age" => $age,
@@ -235,9 +305,22 @@ class User extends CI_Controller {
                 "ref_Organization_name1"=>$ref_Organization_name1,
                 "ref_con_um1" => $ref_con_um1,
                 "ref_email_id1"=>$ref_email_id1,
-                "simage"=>$simage
             ];
+
             $this->load->model('User_model');
+        
+            $upload_photo_config = array( 'upload_path' => './uploads/profilepic/',  'allowed_types' => '*',  'max_size' => 1024,   );
+            $photo = $this->User_model->file_upload ($upload_photo_config, 'img');
+            if ($photo->response == true) { $data['img']=  $photo->filepath; }
+
+            $upload_resume_config = array('upload_path' => './uploads/resume/', 'allowed_types' => '*',  'max_size' => 1024,  );
+            $resume = $this->User_model->file_upload ($upload_resume_config, 'resume');
+            if ($resume->response == true) { $data['resume']=  $resume->filepath; }
+
+            $upload_sign_config = array( 'upload_path' => './uploads/signature/',  'allowed_types' => '*',  'max_size' => 1024,   );
+            $signature = $this->User_model->file_upload ($upload_sign_config, 'simage');
+            if ($signature->response == true) { $data['simage']=  $signature->filepath; }
+          
             $result=$this->User_model->insertData($data);
             if($result !== false){
                 $userid = "NY0000".$result;
@@ -245,11 +328,16 @@ class User extends CI_Controller {
                 $this->db->update('user', ['userid'=> $userid]);
                 $this->session->unset_userdata('success','successfully Submitted');
                 $this->load->view('success');
-            }else{
+            } else {
                 echo 'Failed to Apply';
             }
         }
-        
+    } else {
+        // Handle non-POST requests (e.g., direct access to the URL)
+        redirect('form');
+    }
+
+}
         public function logout(){
             $this->session->unset_userdata('id');
             redirect('user/login');
